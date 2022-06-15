@@ -1,0 +1,123 @@
+  
+  <%- contentFor('HeaderCss') %>     
+    
+  <%- contentFor('body') %>
+  <link href="/public/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+  <!-- Start content -->
+                <div class="content">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Users</h4>
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="javascript:void(0);">The Land Cart</a></li>
+                                        <li class="breadcrumb-item active">Users</li>
+                                    </ol>
+            
+                                    <% include ../Partials/TinyCharts %>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card m-b-20">
+                                    <div class="card-body">
+
+                                        <p class="text-muted m-b-30">
+                                            <a title="Add User" class="btn btn-outline-secondary" href="/add-user"><i class="fas fa-plus"></i> Add User</a>
+                                        </p>
+
+                                        <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Role</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% if(usersList.length > 0) {%>
+                                                    <% usersList.forEach(function(user){ %>
+                                                        <tr>
+                                                            <td><%= user.fname.replace(/\w/, c => c.toUpperCase()) %>  <%= user.lname.replace(/\w/, c => c.toUpperCase()) %></td>
+                                                            <td><%= user.email %></td>
+                                                            <td><%= user.role.replace(/\w/, c => c.toUpperCase()) %></td>
+                                                            <td><span class="badge<%= user.status == 1 ? ' bg-success' : ' bg-danger' %>"><%= user.status == 1 ? ' Active' : ' Deactive' %></span></td>
+                                                            <td>
+                                                                <a title="Edit" class="btn btn-outline-secondary" href="/user/<%= user.uid %>"><i class="fas fa-pencil-alt"></i></a>
+
+                                                                <a id="delete_user" title="Delete" class="btn btn-outline-danger" data-uid="<%= user.uid %>" href="javascript:void(0)"><i class="far fa-trash-alt"></i></a>
+
+                                                                <a id="change_status" data-uid="<%= user.uid %>" data-status="<%= user.status == 1 ? 0 : 1 %>" title="<%= user.status == 1 ? ' Deactivate' : ' Activate' %>" class="btn <%= user.status == 1 ? 'btn-outline-primary' : 'btn-outline-success' %>" href="javascript:void(0)"><i class="far <%= user.status == 1 ? 'fa-thumbs-down' : 'fa-thumbs-up' %>"></i></a>
+
+                                                            </td>
+                                                        </tr>
+                                                    <% }); %>
+                                                <% } %>
+                                            </tbody>
+                                        </table>
+                                        <% if (pages > 0) { %>
+                                            <nav>
+                                                <ul class="pagination">
+                                                    <% if (current == 1) { %>
+                                                        <li class="page-item disabled"><a href="javascript:void(0);" class="page-link">First</a></li>
+                                                    <% } else { %>
+                                                        <li class="page-item"><a class="page-link" href="<%= pages > 1 ? '/all-users/1' : 'javascript:void(0)' %>">First</a></li>
+                                                    <% } %>
+                                                    <% var cur_index = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                                                    <% if (cur_index !== 1) { %>
+                                                        <li class="page-item disabled"><a class="page-link">...</a></li>
+                                                    <% } %>
+                                                    <% for (var i=cur_index; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                                                        <% if (i == current) { %>
+                                                            <li class="page-item active"><a class="page-link" href="<%= pages > 1 ? '/all-users/'+i : 'javascript:void(0)' %>"><%= i %></a></li>
+                                                        <% } else { %>
+                                                            <li class="page-item"><a class="page-link" href="/all-users/<%= i %>"><%= i %></a></li>
+                                                        <% } %>
+                                                        <% if (i == Number(current) + 4 && i < pages) { %>
+                                                            <li class="page-item disabled"><a class="page-link" href="javascript:void(0)">...</a></li>
+                                                        <% } %>
+                                                    <% } %>
+                                                    <% if (current == pages) { %>
+                                                        <li class="page-item disabled"><a class="page-link" href="javascript:void(0)">Last</a></li>
+                                                    <% } else { %>
+                                                        <li class="page-item"><a class="page-link" href="/all-users/<%= pages %>">Last</a></li>
+                                                    <% } %>
+                                                </ul>
+                                            </nav>
+                                        <% } %>
+                                        
+                                                <!-- <li class="page-item disabled">
+                                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                                </li>
+                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item active">
+                                                    <a class="page-link" href="/all-users/2">2 <span class="sr-only">(current)</span></a>
+                                                </li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#">Next</a>
+                                                </li>
+                                            </ul>
+                                        </nav> -->
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+
+                    </div> <!-- container-fluid -->
+
+                </div> <!-- content -->
+                <!-- Required datatable js -->
+                <script src="/public/plugins/sweet-alert2/sweetalert2.min.js"></script>
+                <script src="/public/assets/pages/users.js"></script>
+
+                <%- contentFor('FooterJs') %>
+
+                 

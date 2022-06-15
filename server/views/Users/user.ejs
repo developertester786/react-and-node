@@ -1,0 +1,128 @@
+<%- contentFor('HeaderCss') %>
+<!-- perticular page css -->
+  
+
+<%- contentFor('body') %>
+<!-- <link href="public/plugins/dropzone/dist/dropzone.css" rel="stylesheet" type="text/css"> -->
+    <div class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">Add User</h4>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">The Land Cart</a></li>
+                            <li class="breadcrumb-item active">Add User</li>
+                        </ol>
+                        <% include ../Partials/TinyCharts %>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div class="row">
+                <div class="col-12 d-flex align-items-center justify-content-center">
+
+                    <div class="col-xl-8 col-md-6">
+                        <div class="card directory-card m-b-20">
+                            <div>
+                                <form id="add_new_user" name="add_new_user" class="form-horizontal" action="/add-user" method="POST">
+                                    <div class="directory-bg text-center">
+                                        <div class="directory-overlay">
+                                                <span id="imageuploader">
+                                                    <input name="profileimg" id="profileimg" type="hidden" value="">
+                                                    <img id="ws_user_avatar" class="rounded-circle thumb-lg img-thumbnail dropzone" data-thumb="public/assets/images/users/user.png" src="public/assets/images/users/user.png" alt="Generic placeholder image">
+                                                    <div class="fallback">
+                                                        <input name="image" id="image" type="file">
+                                                    </div>
+                                                    <a href="javascript:void(0)" id="remove_img">x</a>
+                                                </span>
+                                        </div>
+                                    </div>
+            
+                                    <div class="directory-content p-4">
+                                        <div class="mt-4">
+                                            <% if(success != "") {%> 
+                                                <div class="alert alert-success" role="alert">
+                                                    <strong>Done!</strong> <%= success %>
+                                                </div>
+                                            <% } %>
+                                            <div class="row">                                                            
+                                                <div class="col-md-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="email">Email Address</label>
+                                                        <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" data-key="Email Address" autocomplete="off" autofill="false">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="fname">First Name</label>
+                                                        <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name" data-key="First Name" autocomplete="off" autofill="false">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="lname">Last Name</label>
+                                                        <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" data-key="Last Name" autocomplete="off" autofill="false">
+                                                    </div>
+                                                </div>
+                                            </div>
+            
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="username">Username</label>
+                                                        <input type="text" class="form-control" name="username" id="username" placeholder="Username" data-key="Username" autocomplete="off" autofill="false">
+                                                    </div>
+                                                </div>                                                         
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="formrow-password-input">Password</label>
+                                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" data-key="Password">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="phone">Phone Number</label>
+                                                        <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone Number" data-key="Phone number" autocomplete="off" autofill="false">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="role">Role</label>
+                                                        <select name="role" id="role" class="form-control" data-key="Role">
+                                                            <option value="">Select Role</option>
+                                                            <option value="staff">Staff Member</option>
+                                                            <option value="agent">Agent</option>
+                                                            <option value="administrator">Administrator</option>
+                                                            <option value="customer">Customer</option>
+                                                        </select>
+                                                    </div>
+                                                </div>  
+                                            </div>
+                                            <div class="mt-4">
+                                                <button type="submit" id="btn_submit" class="btn btn-primary w-md">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+
+
+        </div> <!-- container-fluid -->
+
+    </div> <!-- content -->
+    <script src="public/plugins/dropzone/dist/dropzone.js"></script>
+    <script src="public/assets/pages/user.js"></script>
+
+<%- contentFor('FooterJs') %>

@@ -41,6 +41,10 @@ build/Release
 node_modules/
 jspm_packages/
 
+# Uploads Folder
+uploads/
+server/uploads/
+
 # TypeScript v1 declaration files
 typings/
 
