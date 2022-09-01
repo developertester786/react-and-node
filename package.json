@@ -1,7 +1,7 @@
 {
-  "name": "the_land_cart",
+  "name": "react_project",
   "version": "1.0.0",
-  "description": "The land cart admin panel",
+  "description": "react node project",
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",
