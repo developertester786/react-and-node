@@ -9,7 +9,7 @@
                             The Land cart
                         </span>
                         <i>
-                            <img src="public/assets/images/logo-sm.png" alt="" height="22">
+                            <img src="/public/assets/images/logo-sm.png" alt="" height="22">
                         </i>
                     </a>
                 </div>
@@ -71,7 +71,7 @@
                         <li class="dropdown notification-list">
                             <div class="dropdown notification-list nav-pro-img">
                                 <a class="dropdown-toggle nav-link arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                    <img src="public/assets/images/users/user.png" alt="user" class="rounded-circle">
+                                    <img src="/public/assets/images/users/user.png" alt="user" class="rounded-circle">
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                     <!-- item-->
@@ -100,9 +100,11 @@
                                 </a>
                                 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="/add-user">Add User</a>
-                                    <a class="dropdown-item" href="#">Add Property</a>
-                                    <a class="dropdown-item" href="#">Add Project</a>
+                                    <% if(session.user.role != 'staff'){ %>
+                                        <a class="dropdown-item" href="/user">Add User</a>
+                                    <% } %>
+                                    <a class="dropdown-item" href="/property">Add Property</a>
+                                    <a class="dropdown-item" href="/project">Add Project</a>
                                     <!-- <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Separated link</a> -->
                                 </div>

@@ -9,22 +9,31 @@ const flash = require('express-flash');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3001;
+const appLocals = require("./app.locals");
 const router = require('./router.js');
 const Authrouter = require('./Authrouter.js');
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
+const twillio = require('./twillio.js');
+const FrontAPI = require('./frontAPI.js');
+//var constants = require('./lib/constants');
+
+app.locals = appLocals;
 
 // enable files upload
 app.use(fileUpload({
   createParentPath: true
 }));
 
+
 // Access public folder from root
 app.use(cors());
-app.use(bodyParser.json());
-app.use(express.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(express.json({limit: '50mb'}));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/public',express.static(path.join(__dirname, "public")));
+app.use('/uploads',express.static(path.join(__dirname, "../uploads")));
 app.get('/layouts/', function(req, res) {
   res.render('view');
 });
@@ -43,7 +52,7 @@ app.use(
   session({
     resave: true,
     saveUninitialized: true,
-    secret:"landCartSecretKey",
+    secret:Buffer.from("landCartSecretKey").toString('base64'),
     cookie: { secure: false, maxAge: 14400000 },
   })
 );
@@ -56,6 +65,7 @@ app.use(function (req, res, next) {
   res.locals.errors = req.flash('errors');
   res.locals.error = req.flash('error');
   res.locals.success = req.flash('success');
+  //res.locals.disallowedPaths = constants.disallowedPaths;
   next();
 });
 
@@ -65,11 +75,16 @@ app.use('/', Authrouter);
 // Add Route file with app
 app.use('/', router); 
 
+app.use('/', twillio);
+
+app.use('/', FrontAPI);
+
 app.get('*', function(req, res){
-  res.render('Auth/pages_404',{
-    title: 'Page Not Found',
-    session: res.locals.session,
-  });
+  // res.render('Auth/pages_404',{
+  //   title: 'Page Not Found',
+  //   session: res.locals.session,
+  // });
+  res.redirect('/404')
 });
 
 app.get('/', function(req, res){

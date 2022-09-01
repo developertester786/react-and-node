@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from "next/link";
+//import Router, { useRouter } from "next/router";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Footer =(props) =>{
@@ -11,24 +13,36 @@ const Footer =(props) =>{
             </div>
 
             <div>
-            <a href="" className="me-4 text-reset">
-                <i className="fab fa-facebook-f"></i>
-            </a>
-            <a href="" className="me-4 text-reset">
-                <i className="fab fa-twitter"></i>
-            </a>
-            <a href="" className="me-4 text-reset">
-                <i className="fab fa-google"></i>
-            </a>
-            <a href="" className="me-4 text-reset">
-                <i className="fab fa-instagram"></i>
-            </a>
-            <a href="" className="me-4 text-reset">
-                <i className="fab fa-linkedin"></i>
-            </a>
-            <a href="" className="me-4 text-reset">
-                <i className="fab fa-github"></i>
-            </a>
+                <Link href="#!">
+                    <a href="replace" className="me-4 text-reset">
+                        <i className="fab fa-facebook-f"></i>
+                    </a>
+                </Link>
+                <Link href="#!">
+                    <a href="replace" className="me-4 text-reset">
+                        <i className="fab fa-twitter"></i>
+                    </a>
+                </Link>
+                <Link href="#!">
+                    <a href="replace" className="me-4 text-reset">
+                        <i className="fab fa-google"></i>
+                    </a>
+                </Link>
+                <Link href="#!">
+                    <a href="replace" className="me-4 text-reset">
+                        <i className="fab fa-instagram"></i>
+                    </a>
+                </Link>  
+                <Link href="#!">
+                    <a href="replace" className="me-4 text-reset">
+                        <i className="fab fa-linkedin"></i>
+                    </a>
+                </Link>
+                <Link href="#!">
+                    <a href="replace" className="me-4 text-reset">
+                        <i className="fab fa-github"></i>
+                    </a>
+                </Link>
             </div>
         </section>
 
@@ -48,48 +62,64 @@ const Footer =(props) =>{
                 <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4">Products</h6>
                 <p>
-                    <a href="#!" className="text-reset">
-                    Angular
-                    </a>
+                    <Link href="#!" >
+                        <a href="replace" className="text-reset">
+                        Angular
+                        </a>
+                    </Link>
                 </p>
                 <p>
-                    <a href="#!" className="text-reset">
-                    React
-                    </a>
+                    <Link href="#!" >
+                        <a href="replace" className="text-reset">
+                        React
+                        </a>
+                    </Link>
                 </p>
                 <p>
-                    <a href="#!" className="text-reset">
-                    Vue
-                    </a>
+                    <Link href="#!" >
+                        <a href="replace" className="text-reset">
+                        Vue
+                        </a>
+                    </Link>
                 </p>
                 <p>
-                    <a href="#!" className="text-reset">
-                    Laravel
-                    </a>
+                    <Link href="#!" >
+                        <a href="replace" className="text-reset">
+                        Laravel
+                        </a>
+                    </Link>
                 </p>
                 </div>
 
                 <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold mb-4">Useful links</h6>
                 <p>
-                    <a href="#!" className="text-reset">
-                    Pricing
-                    </a>
+                    <Link href="#!" >
+                        <a href="replace" className="text-reset">
+                        Pricing
+                        </a>
+                    </Link>
                 </p>
                 <p>
-                    <a href="#!" className="text-reset">
-                    Settings
-                    </a>
+                    <Link href="#!" >
+                        <a href="replace" className="text-reset">
+                        Settings
+                        </a>
+                    </Link>
                 </p>
                 <p>
-                    <a href="#!" className="text-reset">
-                    Orders
-                    </a>
+                    <Link href="#!" >
+                        <a href="replace" className="text-reset">
+                        Orders
+                        </a>
+                    </Link>
                 </p>
                 <p>
-                    <a href="#!" className="text-reset">
-                    Help
-                    </a>
+                    <Link href="#!" >
+                        <a href="replace" className="text-reset">
+                        Help
+                        </a>
+                    </Link>
                 </p>
                 </div>
 
@@ -115,9 +145,11 @@ const Footer =(props) =>{
 
         <div className="text-center p-4" style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}>
             © 2021 Copyright:
-            <a className="text-reset fw-bold" href="https://TruAgency.com/">
-            TruAgency.com
-            </a>
+            <Link href="https://thelandcart.com">
+                <a href='replace' className="text-reset fw-bold">
+                thelandcart.com
+                </a>
+            </Link>
         </div>
       </>
     )

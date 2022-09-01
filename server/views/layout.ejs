@@ -23,12 +23,13 @@
         <div class="content-page">
         <%- body %>
         </div>
+        <link href="/public/assets/css/admin-style.css" rel="stylesheet" type="text/css">
         <% if (session.loggedin) {%>
           <% include ./Partials/Footer %>
         <% } %>
       </div>
       <!-- App js -->
-     <script src="../public/assets/js/app.js"></script>
+     <script src="/public/assets/js/app.js"></script>
 
     </body>
 </html>

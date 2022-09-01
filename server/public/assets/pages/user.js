@@ -6,45 +6,42 @@ var myDropzone = new Dropzone(".dropzone", {
    maxFiles:2,
    maxFilesize: 2,
    createImageThumbnails:false,
-   hiddenInputContainer: "img.rounded-circle",
-   init: function(file) {
+   hiddenInputContainer: "#profileimg",
+   renameFile: function (file) {
+        var username = $("#username").val();
+        var cur_time = new Date().getTime();
+        let newName =  username+'_'+cur_time+'_'+file.name;
+        return newName;
+    },
+    init: function(file) {
         var prevFile = null;
         this.on("addedfile", function(file) {
             var $this = this;
             setTimeout(function () {
-                //console.log('file',file);
                 if(file.status == "error"){
-                    //console.log('error',file.previewTemplate.innerText);
-                    alert(file.previewTemplate.innerText);
+                    $this.removeFile($this.files[0]);
                 } else {
-                    //console.log($this.getQueuedFiles());
-                    //console.log('prev file',prevFile);
                     if(prevFile){
                         $this.removeFile($this.files[0])
                     }
                     prevFile = file;
-                    
-                    //console.log('filename',file.name);
-                    $("#ws_user_avatar").attr('data-imgname', file.name);
+                    $("#profileimg").val(file.upload.filename);
                     previewImage($this);
-                    //console.log('here');
-                    //console.log('new array',$this.getQueuedFiles());
                 }
             }, 10);
-            
-            //file.previewElement.innerHTML = "";
         });
-        // this.on("queuecomplete", function(file) {
-        //     //$("#add_new_user").submit();
-        // });
-
-        // this.on('complete', function(file, responseText) {
-        //     console.log('file',file);
-        //     if(file.status == "error"){
-        //         console.log('error',file.previewTemplate.innerText);
-        //         alert(file.previewTemplate.innerText);
-        //     }
-        // });
+        this.on('error', function(file, errorMessage) {
+            alert('Unable to upload '+file.name+'. '+errorMessage);
+        });
+        this.on("queuecomplete", function(file, res) {
+            var $this = this;
+            
+            if(myDropzone.files.length > 0 && myDropzone.files[0].status == Dropzone.SUCCESS && myDropzone.getQueuedFiles().length <= 1){
+                $("#add_new_user").submit();
+            } else {
+                //$this.removeFile($this.files[0]);
+            }
+        });
     }
 });
 
@@ -53,7 +50,6 @@ function previewImage(input){
     if(fileReference){
         var reader = new FileReader();
         reader.onload = (event) => {
-            //console.log('event.target.result',event.target.result);
             document.getElementById('ws_user_avatar').src = event.target.result;
         }
         reader.readAsDataURL(fileReference); 
@@ -61,19 +57,18 @@ function previewImage(input){
 }
 
 $(document).on('click','#remove_img', function(){
-    myDropzone.removeFile(prevFile);
+    prevFile = null;
+    if(myDropzone.getQueuedFiles().length > 0){
+        myDropzone.removeFile(myDropzone.files[0]);
+    }
+    $("#profileimg").val('');
     $("#ws_user_avatar").attr('src', $("#ws_user_avatar").data('thumb'));
-    $("#ws_user_avatar").data('imgname','');
 });
-
-// $('#uploadfiles').click(function(){
-//    myDropzone.processQueue();
-// });
 
 $(document).on('click','#btn_submit', function(e){
     var valid = 1;
     e.preventDefault();
-    $('#add_new_user input[type="text"], #add_new_user input[type="password"], #add_new_user input[type="email"], #add_new_user select').each(function(){
+    $('#add_new_user input[type="text"], #add_new_user input[type="number"], #add_new_user input[type="password"], #add_new_user input[type="email"], #add_new_user select').each(function(){
         var inputval = $(this).val().trim();
         if(inputval == ""){
             valid = 0;
@@ -102,7 +97,8 @@ $(document).on('click','#btn_submit', function(e){
                 action: 'user_form_validate',
                 username: $('#username').val().trim(),
                 phone: $('#phone').val().trim(),
-                email: $('#email').val().trim()
+                email: $('#email').val().trim(),
+                frmID: $("#frm_id").val(),
             },
             success: function(response) {
                 var dosubmit=1;
@@ -131,9 +127,7 @@ $(document).on('click','#btn_submit', function(e){
                     $('#phone').closest('div').find('span.error').remove();
                 }
                 if(dosubmit == 1){
-                    console.log('here',myDropzone.getQueuedFiles());
                     if(myDropzone.getQueuedFiles().length > 0){
-                        console.log('processing',myDropzone.getQueuedFiles());
                         myDropzone.processQueue();
                     } else {
                         $("#add_new_user").submit();

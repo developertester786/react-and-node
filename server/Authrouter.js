@@ -41,16 +41,21 @@ Authrouter.post('/',[
                   if(err) throw err
                   if(rows.length!=0)
                   {
-                        var password_hash = rows[0]["password"];
-                        const verified = bcrypt.compareSync(req.body.userpassword, password_hash);
-                        if(verified) {
-                              req.session.loggedin = true;
-                              req.session.user = {id: rows[0]['uid'], fname: rows[0]['fname'], lname: rows[0]['lname'], role: rows[0]['role']};
-                              req.session.save();
-                              console.log('user session',req.session);
-                              res.redirect('/dashboard');
+                        if(rows[0]["status"] == 1){
+                              var password_hash = rows[0]["password"];
+                              const verified = bcrypt.compareSync(req.body.userpassword, password_hash);
+                              if(verified) {
+                                    req.session.loggedin = true;
+                                    req.session.user = {id: rows[0]['uid'], fname: rows[0]['fname'], lname: rows[0]['lname'], role: rows[0]['role']};
+                                    req.session.save();
+                                    console.log('user session',req.session);
+                                    res.redirect('/dashboard');
+                              } else {
+                                    req.flash('error', 'Please enter correct username and Password!')
+                                    res.redirect('/')
+                              }
                         } else {
-                              req.flash('error', 'Please enter correct username and Password!')
+                              req.flash('error', 'Your account is deactive. Kindly contact to the site administartor!')
                               res.redirect('/')
                         }
                   } else {

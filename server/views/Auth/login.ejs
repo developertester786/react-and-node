@@ -15,13 +15,13 @@
                             <% if(error) {%> <span class="error"> <%= error %></span> <% } %>
                             <div class="form-group">
                                 <label for="username">Username/Phone</label>
-                                <input type="text" class="form-control<%= errors[0] && errors[0].username ? ' parsley-error' : '' %>" name="username" id="username" placeholder="Enter username" autocomplete="off" autofill="false">
+                                <input type="text" class="form-control<%= errors[0] && errors[0].username ? ' parsley-error' : '' %>" name="username" id="username" placeholder="Enter username">
                                 <% if(errors[0] && errors[0].username) {%> <span class="error"> <%= errors[0].username %></span> <% } %>
                             </div>
 
                             <div class="form-group">
                                 <label for="userpassword">Password</label>
-                                <input type="password" class="form-control<%= errors[0] && errors[0].userpassword ? ' parsley-error' : '' %>" id="userpassword" name="userpassword" placeholder="Enter password" autocomplete="off" autofill="false">
+                                <input type="password" class="form-control<%= errors[0] && errors[0].userpassword ? ' parsley-error' : '' %>" id="userpassword" name="userpassword" placeholder="Enter password">
                                 <% if(errors[0] && errors[0].userpassword) {%> <span class="error"> <%= errors[0].userpassword %></span> <% } %>
                             </div>
 
